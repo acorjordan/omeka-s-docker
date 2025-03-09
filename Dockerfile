@@ -14,8 +14,14 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libicu-dev \
     icu-devtools \
+    imagemagick \
+    libmagickwand-dev \
+    libmcrypt-dev \
+    zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql intl \
+    && docker-php-ext-install gd pdo pdo_mysql intl iconv \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
     && rm -rf /var/lib/apt/lists/*
 
 # Enable Apache mod_rewrite
@@ -31,6 +37,9 @@ RUN curl -L -o omeka-s.zip https://github.com/omeka/omeka-s/releases/download/v$
     && mv omeka-s/* omeka-s/.* ./ || true \
     && rm -rf omeka-s
 
+# Copy entrypoint script
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -44,4 +53,4 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 775 /var/www/html
 EXPOSE 80
 
 # Start Apache
-CMD ["apache2-foreground"]
+CMD ["entrypoint.sh"]
