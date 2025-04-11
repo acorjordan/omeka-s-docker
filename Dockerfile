@@ -6,6 +6,7 @@ ARG OMEKA_VERSION=4.1.1
 
 # Install required PHP extensions and dependencies
 RUN apt-get update && apt-get install -y \
+    bc \
     git \
     ffmpeg \
     icu-devtools \
@@ -19,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     mariadb-client \
     pdftk \
     unzip \
+    vim \
     zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql intl iconv \
