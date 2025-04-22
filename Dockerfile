@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     mariadb-client \
     pdftk \
+    sendmail \
     unzip \
     vim \
     zlib1g-dev \
