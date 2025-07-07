@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
     vim \
     zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql intl iconv \
+    && docker-php-ext-install gd pdo pdo_mysql intl iconv zip \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && rm -rf /var/lib/apt/lists/*
