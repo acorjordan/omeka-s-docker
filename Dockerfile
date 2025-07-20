@@ -46,7 +46,7 @@ RUN curl -L -o omeka-s.zip https://github.com/omeka/omeka-s/releases/download/v$
 # Copy entrypoint script
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-COPY languages/* /var/www/html/application/languages/
+COPY languages/* /var/www/html/application/language/
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
